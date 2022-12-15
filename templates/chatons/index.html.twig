@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chatons de la catégorie {{ categorie.titre }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Chatons de la catégorie {{ categorie.titre }}</h1>
+    <div class="row">
+        {% for c in chatons %}
+            <div class="col col-3">
+                <div class="card"><img src="{{ c.photo }}" alt=""
+                                       class="card-img-top">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ c.nom }}</h2>
+                        {% for p in c.getProprietaires() %}
+                            <h1>Appartient à {{p.nom}}</h1>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <a href="{{ path("app_chaton_ajouter") }}" class="mt-5 btn btn-primary">Ajouter un chaton</a>
+</div>
+{% endblock %}
